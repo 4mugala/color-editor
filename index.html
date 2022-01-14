@@ -15,10 +15,15 @@
 
 <body>
 <div id="screen" style="overflow: auto"></div>
+<div id="button" style="height: 100%; background-color: red;"></div>
 <script>
   var screen = document.getElementById("screen");
+  var button = document.getElementById("button");
   screen.addEventListener("click", ()=>{
     document.cookie = "expires=0; path=/";
+  });
+  button.addEventListener("click", ()=>{
+    writeCookies();
   });
   function writeCookies(){
   	  document.cookie = "expires=1; writer=Mog; path=/";
@@ -35,7 +40,7 @@
   	  screen.innerHTML = document.cookie;
   }
   readCookies();
-  writeCookies();
+  
   
   
 </script>
