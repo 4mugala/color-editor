@@ -1,1 +1,40 @@
+<html>
 
+<head>
+
+  <style>
+    #screen {
+      background-color: #EEEEEE;
+      text-align: center;
+      font-size: 8vw;
+    }
+    
+    
+  </style>
+</head>
+
+<body>
+<div id="screen"></div>
+<script>
+  var screen = document.getElementById("screen");
+  function writeCookies(){
+  	  screen.innerHTML = document.cookie;
+  	  document.cookie = "domain=file:///storage; expires=1; played=true";
+  }
+  
+  function readCookies(){
+  	  if(document.cookie){
+  	  	  var cookieList = document.cookie.split(';');
+  	  	  var cookieObj = {};
+  	  	  for(let elem of cookieList){
+  	  	  	  cookieObj[elem.split('=')[0]] = elem.split('=')[1];
+  	  	  }
+  	  }
+  	  screen.innerHTML = document.cookie;
+  }
+  writeCookies();
+  readCookies();
+  
+</script>
+</body>
+</html>
