@@ -17,6 +17,9 @@
 <div id="screen" style="overflow: auto"></div>
 <script>
   var screen = document.getElementById("screen");
+  screen.addEventListener("click", ()=>{
+    document.cookie = "max-age=0; path=/"
+  });
   function writeCookies(){
   	  document.cookie = "expires=1; writer=Mog; path=/";
   }
