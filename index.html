@@ -34,7 +34,8 @@
   	  	  var cookieList = document.cookie.split(';');
   	  	  var cookieObj = {};
   	  	  for(let elem of cookieList){
-  	  	  	  cookieObj[elem.split('=')[0]] = elem.split('=')[1];
+             let l = elem.split('=');
+  	  	  	  cookieObj[l[0]] = l[1];
   	  	  }
   	  }
   	  screen.innerHTML = cookieObj['writ'];
