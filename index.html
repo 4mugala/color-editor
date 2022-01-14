@@ -20,7 +20,7 @@
   var screen = document.getElementById("screen");
   var button = document.getElementById("button");
   screen.addEventListener("click", ()=>{
-    document.cookie = "expires=0; path=/";
+    document.cookie = "expires=; path=/";
   });
   button.addEventListener("click", ()=>{
     writeCookies();
