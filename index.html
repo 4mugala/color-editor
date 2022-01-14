@@ -18,8 +18,7 @@
 <script>
   var screen = document.getElementById("screen");
   function writeCookies(){
-  	  screen.innerHTML = document.cookie;
-  	  document.cookie = "domain=4mugala.github.io; expires=1; played=true";
+  	  document.cookie = "domain=4mugala.github.io; expires=1; writer=Mog";
   }
   
   function readCookies(){
@@ -32,8 +31,9 @@
   	  }
   	  screen.innerHTML = document.cookie;
   }
-  writeCookies();
   readCookies();
+  writeCookies();
+  
   
 </script>
 </body>
