@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0; user-scalable: no">
+  <link rel="stylesheet" href="styles/style.css" />
+  <title>ColorEditor</title>
+  <style>
+  	  @font-face {
+  font-family: roboto;
+  src: url('roboto.ttf');
+}
+
+  	  body{
+  	  	 background-color: rgba(0, 35, 45, 1);
+  	  	 padding: 4vw;
+  	  }
+    #input {
+      background-color: rgb(238, 238, 238, 0.5);
+      text-decoration: none;
+      font-size: 4vw;
+      width: calc(100% - 6vw);
+      border-radius: 2vw;
+      border: none;
+      outline: none;
+      padding: 1vw 3vw;
+      margin: 4vw 0vw;
+    }
+
+    #holder {
+    	  background-color: white;
+      display: flex;
+      border-radius: 2.5vw;
+    }
+    
+    .title{
+    	  text-align: center;
+    	  font-family: roboto;
+    	  font-size: 3vw;
+    	  background-color: rgba(25, 25, 30, 0.8);
+    	  color: white;
+    	  border-radius: 2vw 2vw 0vw 0vw;
+    	  padding: 1vw;
+    }
+    #color-table{
+    	 display: flex;
+    	 flex-direction: column;
+    	 width: 100%;
+    }
+    #color{
+    	 background-color: black;
+    	 color: white;
+    	 font-family: roboto;
+    	 font-size: 3vw;
+    	 padding: 10vw;
+    	 height: 20vw;
+    	 text-align: center;
+    	 height: fit-content;
+    	 margin: 1vw 0vw;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="text-align: center; font-size: 4vw; font-family: roboto; color: white">ColorEditor</div>
+  <input id="input"></input>
+  <div id="holder">
+    <div id="color-table">
+    	<div class="title" >Color</div>
+    	<div id="color"></div>
+    	 <div id="output" class="title" style="border-radius: 0vw 0vw 2vw 2vw">#000000</div>
+    </div>
+  </div>
+  
+<script>
+    class ColorEditor {
+    	
+      color(value) {
+      	 if(value.includes(',')){
+        this.toHex(value);
+        this.conversion = `HEX: ${this.hex}`;
+        }else if(value != ''){
+        	this.toRGB(value);
+        	this.conversion = `RGB: rgba(${this.rgba})`;
+        }else{
+        	this.conversion = 'Nothing converted yet'
+        }
+      }
+      
+      toHex(value) {
+        this.rgbaList = value.split(",");
+        let r, g, b, a;
+        if(this.rgbaList){
+          [r, g, b, a] = this.rgbaList;
+         }
+          /\d/.test(r)? r = parseInt(r): r = 0;
+          /\d/.test(g)? g = parseInt(g): g = 0;
+          /\d/.test(b)? b = parseInt(b): b = 0;
+          /\d/.test(a)? a = parseInt(parseFloat(a) * 255): a = 255;
+          
+          r = r.toString(16);
+          g = g.toString(16);
+          b = b.toString(16);
+          a = a.toString(16);
+          
+          r.length == 1? r = '0' + r: null;
+          g.length == 1? g = '0' + g: null;
+          b.length == 1? b = '0' + b: null;
+          a.length == 1? a = '0' + a: null;
+          
+          this.hex = '#' + r + g + b + a;
+        
+      }
+      
+      toRGB(value){
+      	  let r = parseInt(value.slice(0, 2), 16);
+      	  let g = parseInt(value.slice(2, 4), 16);
+      	  let b = parseInt(value.slice(4, 6), 16);
+      	  if (value.slice(6, 8) != []){
+      	  	  var a = parseInt(value.slice(6, 8), 16);
+      	  }else{
+      	  	  var a = 255;
+      	  }
+      	  this.rgba = `${r}, ${g}, ${b}, ${a/255}`;
+      }
+    }
+    
+    const colorEd = new ColorEditor();
+    const palette = document.getElementById('palette');
+    const input = document.getElementById('input');
+    const output = document.getElementById('output');
+    const colorScreen = document.getElementById('color');
+    output.addEventListener('click', ()=>{
+    	 navigator.clipboard.writeText(colorEd.conversion.slice(4,));
+    });
+    input.addEventListener('input', () => {
+    	  if(input.value){
+      colorEd.color(input.value);
+      }else{
+      	colorEd.color('');
+      }
+      output.innerHTML = `${colorEd.conversion}`;
+      colorScreen.style.backgroundColor = `${colorEd.conversion.slice(4,)}`;
+      
+      window.onload = () => {
+      	let storedColor = window.localStrage.getItem("Color");
+            output.innerHTML = `${storedColor}`;
+      colorScreen.style.backgroundColor = `${storedColor}`;
+        };
+
+        window.addEventListener("beforeunload", (event) => {
+            window.localStrage.setItem("Color", colorEd.conversion.slice(4,));
+        });
+    });
+  </script>
+</body>
+</html>
