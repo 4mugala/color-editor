@@ -144,13 +144,15 @@
       colorScreen.style.backgroundColor = `${colorEd.conversion.slice(4,)}`;
       
       window.onload = () => {
-      	let storedColor = window.localStrage.getItem("Color");
+      	if(window.localStorage.("Color");){
+      	let storedColor = window.localStorage.("Color");
             output.innerHTML = `${storedColor}`;
       colorScreen.style.backgroundColor = `${storedColor}`;
+      }
         };
 
         window.addEventListener("beforeunload", (event) => {
-            window.localStrage.setItem("Color", colorEd.conversion.slice(4,));
+            window.localStorage.setItem("Color", colorEd.conversion.slice(4,));
         });
     });
   </script>
