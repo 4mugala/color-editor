@@ -141,7 +141,7 @@
             if (window.localStorage.getItem("Color")) {
                 let storedColor = window.localStorage.getItem("Color");
                 output.innerHTML = `${storedColor}`;
-                colorScreen.style.backgroundColor = `${storedColor}`;
+                input.value = `${storedColor}`;
             }
         };
         document.addEventListener("visibilitychange", () => {
