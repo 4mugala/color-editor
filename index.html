@@ -144,9 +144,9 @@
                 colorScreen.style.backgroundColor = `${storedColor}`;
             }
         };
-        window.onbeforeunload = (event) => {
+        document.addEventListener("visibilitychange", () => {
             window.localStorage.setItem("Color", colorScreen.style.backgroundColor);
-        };
+        });
     </script>
 </body>
 
