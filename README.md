@@ -1,5 +1,5 @@
 # About
-Color Editor is a simple web app for converting hex to rgba and vice versa available on https:colored.netlify.app 
+Color Editor is a simple web app for converting hex to rgba and vice versa available on [link](https:colored.netlify.app)
 
 ## Developer
 Jacob M. Mugala
